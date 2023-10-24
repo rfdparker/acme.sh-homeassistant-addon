@@ -15,6 +15,7 @@ DNS_ENV_OPTIONS=$(jq -r '.dnsEnvVariables |map("export \(.name)=\(.value|tojson)
 KEY_LENGTH=$(bashio::config 'keylength')
 FULLCHAIN_FILE=$(bashio::config 'fullchainfile')
 KEY_FILE=$(bashio::config 'keyfile')
+SERVER=$(bashio::config 'server')
 
 source <(echo ${DNS_ENV_OPTIONS});
 
@@ -27,6 +28,7 @@ function issue {
     # Issue the certificate exit corretly if is not time to renew
     local RENEW_SKIP=2
     acme.sh --issue --domain ${DOMAIN} \
+        --server ${SERVER} \
         --keylength ${KEY_LENGTH} \
         --dns ${DNS_PROTO} \
         || { ret=$?; [ $ret -eq ${RENEW_SKIP} ] && return 0 || return $ret ;}

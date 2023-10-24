@@ -1,6 +1,6 @@
 {
   "name": "Acme.sh",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "slug": "acmesh",
   "description": "Full ACME client to generate and renew a SSL certificate",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
@@ -14,7 +14,8 @@
     "dnsEnvVariables": [null],
     "keylength": "ec-256",
     "fullchainfile": "fullchain.pem",
-    "keyfile": "privkey.pem"
+    "keyfile": "privkey.pem",
+    "server": "zerossl"
   },
   "schema": {
     "accountemail": "str",
@@ -25,6 +26,7 @@
     ],
     "keylength": "match(2048|4096|ec-256|ec-384|ec-521)",
     "fullchainfile": "str",
-    "keyfile": "str"
+    "keyfile": "str",
+    "server": "match(buypass|buypass_test|google|googletest|letsencrypt|letsencrypt_test|sslcom|zerossl)"
   }
 }
